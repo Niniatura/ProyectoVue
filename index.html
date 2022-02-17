@@ -13,13 +13,51 @@
     <div id="app">
         <p>{{message}}</p>
         <h1>Saldo disponible: {{cantidad >=1 ? cantidad : 'Carga la sube'}}</h1>
+        <p v-text="unaDirectiva"></p>
+        <ul v-html="items"></ul>
+        <img v-bind:src="PhotoURL" v-bind:alt="alt">
+        <img v-bind:src="PhotoURL" v-bind:[key]="alt">
+        <p v-bind:style="myStyle">Actualizo mi color</p>
+        <!--El v-bind se puede borrar el v-bind y anda igual-->
+        <p :style="myStyle">Soy bind sin v-bind</p>
+        <button type="button" v-on:click="saludar">Mostrar saludo</button>
+        <button type="button" v-on:click="saludar2($event)">Mostrar saludo 2</button>
+        <button type="button" v-on:click="saludar3">Mostrar saludo 3</button>
+        <div class="content">{{nombreCompleto}}</div>
+
+
     </div>
     <script>
         new Vue({
             el:'#app',
             data:{
                 message:'Hola!',
-                cantidad:2
+                cantidad:2,
+                unaDirectiva:'Esto es una directiva',
+                items:'<li>Mis servicios</li>',
+                PhotoURL:'https://www.placecage.com/200/300',
+                alt:'Nicolas Cage',
+                key:'title',
+                myStyle:'color:green',
+                firstName:'Nelita',
+                lastName:'Marcos',
+
+            },
+            methods:{
+                saludar () {
+                    alert('Hola Neli!');
+                },
+                saludar2 (event) {
+                    alert('coordenadas del boton' + event.screenX+''+ event.screenY);
+                },
+                saludar3 (){
+                    alert(this.message);
+                }
+            },
+            computed:{
+                nombreCompleto() {
+                    return this.firstName+''+this.lastName;
+                }
             }
         })
     </script>
